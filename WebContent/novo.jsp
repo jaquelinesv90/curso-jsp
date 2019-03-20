@@ -66,12 +66,19 @@
 					<input class="input100" type="text" name="status"  value="${chamado.status}"
 						placeholder="Status"> <span class="focus-input100"></span>
 				</div>
+				<select name="listarStatus">
+					<c:forEach var="item" items="${chamado.getListStatus}">
+						<option value="${item.status}">
+					</c:forEach>
+				</select>
+				
+				<!--  
 				<select id="selectStatus" class="wrap-input100 validate-input">
 					<option class="input100" value="1" selected> Em Aberto</option>
 					<option class="input100" value="2"> Em Andamento</option>
 					<option class="input100" value="3"> Encerrado</option>
 				</select>
-				
+				-->
 								
 				<div class="wrap-input100 validate-input">
 					<input class="input100" type="text" name="diasAberto"  value="${chamado.diasAberto}"
@@ -80,25 +87,17 @@
 
 				<div class="container-contact100-form-btn">
 
-					<button class="contact100-form-btn" style="margin-right: 10px" onclick="voltar()">
+					<button class="contact100-form-btn" style="margin-right: 10px" 
+								type="button"  onclick="voltar()">
 						<span><i class="fa fa-paper-plane-o m-r-6" 
 							aria-hidden="true"></i> Voltar </span>
 					</button>
-					
-					<input type="button" name="Voltar2"  onclick="voltar()"
-						 value="Voltar 2" class="contact100-form-btn">
-					<span><i class="fa fa-paper-plane-o m-r-6"
-							aria-hidden="true"></i></span>
-					
-					<input type="submit"  value="cadastrar">
-					
-					<!-- 
-					<button class="contact100-form-btn">
+				  
+					<button class="contact100-form-btn" type="submit">
 						<span> <i class="fa fa-paper-plane-o m-r-6"
 							aria-hidden="true"></i> Cadastrar
 						</span>
 					</button>
-					 -->	
 				</div>
 			</form>
 		</div>
@@ -123,18 +122,6 @@
 	<!--===============================================================================================-->
 	<script src="js/main.js"></script>
 
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async
-		src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag() {
-			dataLayer.push(arguments);
-		}
-		gtag('js', new Date());
-
-		gtag('config', 'UA-23581568-13');
-	</script>
 
 </body>
 </html>

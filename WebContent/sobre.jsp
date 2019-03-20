@@ -42,7 +42,7 @@
 				</div>
 				<div>
 					<span><i class="fa fa-paper-plane-o m-r-6"
-								aria-hidden="true"></i> Desenvolvido por: Jaqueline Lemke
+								aria-hidden="true"></i> Desenvolvido por: Jaqueline L.
 							</span>	
 				</div>	
 				<div>

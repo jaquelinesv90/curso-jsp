@@ -3,6 +3,7 @@ package com.gerenciador.servlet;
 import java.io.IOException;
 import java.util.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gerenciador.dao.DaoChamado;
 import com.gerenciador.dao.DaoUsuario;
+import com.gerenciador.enumerador.StatusEnum;
 import com.gerenciador.model.Chamado;
 import com.gerenciador.model.Usuario;
 
@@ -38,10 +40,15 @@ public class ChamadoServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String acao = request.getParameter("hiddenAcao");
+		int id = Integer.parseInt(request.getParameter("param"));
 
 		try {
 
 			switch (acao) {
+			case "novo":
+				preencheListBox(request, response);
+				break;
+				
 			case "salvar":
 				inserir(request, response);
 				break;
@@ -51,7 +58,7 @@ public class ChamadoServlet extends HttpServlet {
 				break;
 
 			case "excluir":
-				excluir(request,response);
+				excluir(request,response,id);
 				break;
 			default:
 				break;
@@ -104,14 +111,22 @@ public class ChamadoServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		//daoChamado.findById(id);
-		
-		
-		
+		//response.sendRedirect("novo.jsp");
 	}
 	
 	private void excluir(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response, int id) throws ServletException, IOException {
 		
+		daoChamado.excluir(id);
+		request.setAttribute("mensagem", "Excluido com sucesso");
+	}
+	
+	
+	public void preencheListBox(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
+		request.getSession().setAttribute("listaStatus",  StatusEnum.values());
+		RequestDispatcher dispatcher = request.getRequestDispatcher("novo.jsp");
+		dispatcher.forward(request, response);
+		//response.sendRedirect("novo.jsp");
 	}
 
 }

@@ -2,8 +2,6 @@ package com.gerenciador.model;
 
 import java.util.Date;
 
-import com.gerenciador.enumerador.StatusEnum;
-
 public class Chamado {
 
 	private int id;
@@ -78,9 +76,5 @@ public class Chamado {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
-	}
-	
-	public StatusEnum[] getListStatus(){
-		return StatusEnum.values();
 	}
 }

@@ -101,4 +101,23 @@ public class DaoChamado {
     	}
     	return chamado;	
     }
+    
+    public void excluir(int id){
+		try {
+
+			String sql = "delete from chamado c where id= ?";
+			PreparedStatement prepared = connection.prepareStatement(sql);
+			
+			prepared.setInt(1, id);
+			
+			prepared.execute();
+			connection.commit();
+		} catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (Exception excep) {
+				excep.printStackTrace();
+			}
+		}
+	}
 }

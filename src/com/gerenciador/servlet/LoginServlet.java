@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.gerenciador.dao.DaoChamado;
 import com.gerenciador.dao.DaoLogin;
+import com.gerenciador.model.Usuario;
 
 @WebServlet("/loginServlet")
 public class LoginServlet extends HttpServlet {
@@ -32,18 +33,21 @@ public class LoginServlet extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
 
         try {
-
+        	Usuario usuario = new Usuario();
+        	
             String email = request.getParameter("email");
             String senha = request.getParameter("senha");
-
-            if (daoLogin.validarLogin(email, senha)) {// acesso ok
-            	request.getSession().setAttribute("email", email);
-                request.getSession().setAttribute("senha", senha);
-            	
+            
+            usuario = daoLogin.validarLogin(email, senha);
+            if (usuario != null) {// acesso ok
+                
                 RequestDispatcher dispatcher = request
                         .getRequestDispatcher("home.jsp");
                 
                 request.setAttribute("chamados", daoChamado.listarChamados());
+                
+                request.getSession().setAttribute("usuarioLogado", usuario);
+                
                 dispatcher.forward(request, response);
                 
             } else {// acesso negado

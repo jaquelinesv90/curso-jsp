@@ -36,12 +36,11 @@ a					{
 </style>
 </head>
 <body>
-<input type="hidden" value="editar" name="hiddenEdicao">
 	<div class="container-contact100">
 			<form class="contact100-form validate-form" action="ChamadoServlet">
 				<div align="right">
 					<a href="sobre.jsp"> Sobre</a>
-					<a href="index.jsp" > Sair</a>
+					<a href="logoutServlet"> Sair</a>
 				</div>
 			
 				<span class="contact100-form-title"> Meus Chamados </span>
@@ -63,15 +62,15 @@ a					{
 							<td><fmt:formatDate pattern="dd/MM/yyyy" value="${chamado.dataabertura}"/></td>
 							<td><c:out value="${chamado.status}"></c:out></td>
 							<td><c:out value="${chamado.diasaberto}"></c:out></td>
-							<td><a href="chamadoServlet?hiddenAcao=editar&{user.id}">Editar</a></td>
-							<td><a href="chamadoServlet?hiddenAcao=editar&{user.id}">Excluir</a></td>
+							<td><a href="chamadoServlet?hiddenAcao=editar&param=${chamado.id}">Editar</a></td>
+							<td><a href="chamadoServlet?hiddenAcao=excluir&param=${chamado.id}">Excluir</a></td>
 						</tr>
 					</c:forEach>				
 				</table>
 				
 				<br>
 				
-				<a href="novo.jsp">Novo</a>
+				<a href="chamadoServlet?hiddenAcao=novo">Novo</a>
 			<!--				
 				<input type="button" onclick="exibeMsgExcluir()" value="Excluir">
 				
@@ -98,7 +97,10 @@ a					{
 				-->	
 			</form>
 	</div>
+	<div class="alert alert-sucess">
 	
+		<h3>${mensagem}</h3>
+	</div>
 
     <script  language="javascript">
     

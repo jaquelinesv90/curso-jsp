@@ -66,9 +66,14 @@
 					<input class="input100" type="text" name="status"  value="${chamado.status}"
 						placeholder="Status"> <span class="focus-input100"></span>
 				</div>
+				<% 
+					out.print(request.getAttribute("listaStatus"));
+				out.print(request.getAttribute("teste"));
+				%>
 				<select name="listarStatus">
-					<c:forEach var="item" items="${chamado.getListStatus}">
-						<option value="${item.status}">
+					<option value="Selecione"></option>
+					<c:forEach items="${request.getParameter('listaStatus')}>" var="value">
+						<option value="${value}">
 					</c:forEach>
 				</select>
 				

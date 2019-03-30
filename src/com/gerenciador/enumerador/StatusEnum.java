@@ -9,7 +9,7 @@ public enum StatusEnum {
 	private String status;
 	
 	private StatusEnum(String texto){
-		getStatus();
+		status = texto;
 	}
 	
 	public String getStatus(){

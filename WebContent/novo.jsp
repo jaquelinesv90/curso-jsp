@@ -66,25 +66,13 @@
 					<input class="input100" type="text" name="status"  value="${chamado.status}"
 						placeholder="Status"> <span class="focus-input100"></span>
 				</div>
-				<% 
-					out.print(request.getAttribute("listaStatus"));
-				out.print(request.getAttribute("teste"));
-				%>
+				
 				<select name="listarStatus">
-					<option value="Selecione"></option>
-					<c:forEach items="${request.getParameter('listaStatus')}>" var="value">
-						<option value="${value}">
+					<c:forEach items="${roleNames}" var="role">
+						<option value="${role}" ${role == listaStatus ? 'selected' : ''}>${role}</option>
 					</c:forEach>
 				</select>
-				
-				<!--  
-				<select id="selectStatus" class="wrap-input100 validate-input">
-					<option class="input100" value="1" selected> Em Aberto</option>
-					<option class="input100" value="2"> Em Andamento</option>
-					<option class="input100" value="3"> Encerrado</option>
-				</select>
-				-->
-								
+
 				<div class="wrap-input100 validate-input">
 					<input class="input100" type="text" name="diasAberto"  value="${chamado.diasAberto}"
 						placeholder="Quantidade de dias em aberto"> <span class="focus-input100"></span>

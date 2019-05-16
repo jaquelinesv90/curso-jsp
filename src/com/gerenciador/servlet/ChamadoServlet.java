@@ -1,7 +1,9 @@
 package com.gerenciador.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,7 +21,7 @@ import com.gerenciador.model.Usuario;
 /**
  * 
  * @author jaqueline
- *
+ * This class is used to make  communication with database
  */
 @WebServlet("/chamadoServlet")
 public class ChamadoServlet extends HttpServlet {
@@ -40,8 +42,12 @@ public class ChamadoServlet extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		String acao = request.getParameter("hiddenAcao");
-		int id = Integer.parseInt(request.getParameter("param"));
-
+		int id = 0;
+		
+		if(request.getParameter("param_id") != null){
+			id = Integer.parseInt(request.getParameter("param_id"));
+		}
+		
 		try {
 
 			switch (acao) {
@@ -54,7 +60,7 @@ public class ChamadoServlet extends HttpServlet {
 				break;
 
 			case "editar":
-				editar(request, response);
+				editar(request, response,id);
 				break;
 
 			case "excluir":
@@ -108,10 +114,26 @@ public class ChamadoServlet extends HttpServlet {
 	}
 	
 	private void editar(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response,int id) throws ServletException, IOException {
 		
-		//daoChamado.findById(id);
-		//response.sendRedirect("novo.jsp");
+		try {
+			//a pesquisa deverá retornar apenas 5 por página
+			ArrayList<Chamado> lista = (ArrayList<Chamado>)request.getSession().getAttribute("chamados");
+			Chamado chamadoSelecionado;
+			
+			for (Chamado chamado : lista) {
+				if(chamado.getId() == id){
+					chamadoSelecionado = chamado;
+				}
+			}
+			////setar na variavel chamado o chamado selecionado
+			
+			 
+			////daoChamado.findById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		response.sendRedirect("novo.jsp");
 	}
 	
 	private void excluir(HttpServletRequest request,
@@ -123,7 +145,18 @@ public class ChamadoServlet extends HttpServlet {
 	
 	
 	public void preencheListBox(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		request.getSession().setAttribute("listaStatus",  StatusEnum.values());
+		System.out.println(java.util.Arrays.asList(StatusEnum.values()));
+		//List<StatusEnum> listavaloresEnum= java.util.Arrays.asList(StatusEnum.values());
+		//String listaStatus = "";
+		/**
+		 * 
+		
+		for (StatusEnum statusEnum : listavaloresEnum) {
+			listaStatus += statusEnum +"\t";
+		}
+		 */		
+		request.getSession().setAttribute("listaStatus", java.util.Arrays.asList(StatusEnum.values()));
+				
 		RequestDispatcher dispatcher = request.getRequestDispatcher("novo.jsp");
 		dispatcher.forward(request, response);
 		//response.sendRedirect("novo.jsp");

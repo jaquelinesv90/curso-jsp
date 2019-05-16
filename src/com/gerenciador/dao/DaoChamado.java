@@ -85,23 +85,29 @@ public class DaoChamado {
     }
     
     
-    public Chamado findById(int id){
+	public Chamado findById(int id) throws Exception {
     	
-    	Chamado chamado = new Chamado();
-    	
-    	try {
     		
-    	String sql = "select * from chamado where id= ?";
-    	PreparedStatement consulta = connection.prepareStatement(sql);
+    	String sql = "select * from chamado where id= '"+id+"'";
+    	PreparedStatement statement = connection.prepareStatement(sql);
     	
-    	consulta.setInt(1, id);
+    	ResultSet resultSet = statement.executeQuery();
     	
-    	}catch(Exception e){
-    		e.printStackTrace();
-    	}
-    	return chamado;	
+    	if (resultSet.next()) {
+    		Chamado chamado = new Chamado();
+    		chamado.setId(resultSet.getInt("id"));
+    		chamado.setNumchamado(resultSet.getInt("numchamado"));
+    		chamado.setTitulo(resultSet.getString("titulo"));
+    		chamado.setDescricao(resultSet.getString("descricao"));
+    		chamado.setDataabertura(resultSet.getDate("dataabertura"));
+    		chamado.setStatus(resultSet.getString("status"));
+    		chamado.setDiasaberto(resultSet.getInt("diasaberto"));
+			return chamado;
+		} else {
+			return null;
+		}
     }
-    
+
     public void excluir(int id){
 		try {
 

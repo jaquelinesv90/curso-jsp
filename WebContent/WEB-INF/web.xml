@@ -4,25 +4,8 @@
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
-  
   <filter>
-  	<filter-name>filter</filter-name>
-  	<filter-class>com.gerenciador.filter.Filter</filter-class>
+    <filter-name>filter</filter-name>
+    <filter-class>com.gerenciador.filter.Filter</filter-class>
   </filter>
-<!--  
-  <servlet>
-  	<servlet-name>HomeServlet</servlet-name>
-  	<servlet-class>com.gerenciador.servlet.HomeServlet</servlet-class>
-  </servlet>
-  
-  <servlet-mapping>
-  	<servlet-name>HomeServlet</servlet-name>
-  	<url-pattern>/</url-pattern>
-  </servlet-mapping>
-  
-  <servlet-mapping>
-  	<servlet-name>default</servlet-name>
-  	<url-pattern>*.resources</url-pattern>
-  </servlet-mapping>
--->  
 </web-app>

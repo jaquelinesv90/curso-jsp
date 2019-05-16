@@ -62,8 +62,8 @@ a					{
 							<td><fmt:formatDate pattern="dd/MM/yyyy" value="${chamado.dataabertura}"/></td>
 							<td><c:out value="${chamado.status}"></c:out></td>
 							<td><c:out value="${chamado.diasaberto}"></c:out></td>
-							<td><a href="chamadoServlet?hiddenAcao=editar&param=${chamado.id}">Editar</a></td>
-							<td><a href="chamadoServlet?hiddenAcao=excluir&param=${chamado.id}">Excluir</a></td>
+							<td><a href="chamadoServlet?hiddenAcao=editar&param_id=${chamado.id}">Editar</a></td>
+							<td><a href="chamadoServlet?hiddenAcao=excluir&param_id=${chamado.id}">Excluir</a></td>
 						</tr>
 					</c:forEach>				
 				</table>
@@ -71,6 +71,7 @@ a					{
 				<br>
 				
 				<a href="chamadoServlet?hiddenAcao=novo">Novo</a>
+				<a>Imprimir</a>
 			<!--				
 				<input type="button" onclick="exibeMsgExcluir()" value="Excluir">
 				

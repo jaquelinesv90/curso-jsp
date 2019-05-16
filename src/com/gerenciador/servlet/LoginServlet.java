@@ -43,8 +43,8 @@ public class LoginServlet extends HttpServlet {
                 
                 RequestDispatcher dispatcher = request
                         .getRequestDispatcher("home.jsp");
-                
-                request.setAttribute("chamados", daoChamado.listarChamados());
+                //delimitar a pesquisar por 5 por página
+                request.getSession().setAttribute("chamados", daoChamado.listarChamados());
                 
                 request.getSession().setAttribute("usuarioLogado", usuario);
                 

@@ -42,7 +42,10 @@ public class DownloadFileServlet extends HttpServlet {
 			List dados = new ArrayList<>();
 			dados.add(chamados);
 			
-			String fileUrl = relatorioService.gerarRelatorio(dados, new HashMap<>(), 
+			String tipoExportar = request.getParameter("tipoExportar");
+
+			
+			String fileUrl = relatorioService.gerarRelatorio(dados, new HashMap(), 
 					"rel_chamado", "rel_chamado", request.getServletContext(), null);
 			
 			//caminho completo e absoluto do arquivo
@@ -72,10 +75,9 @@ public class DownloadFileServlet extends HttpServlet {
 			
 			byte[] buffer = new byte[4096];
 			int bytesReader= -1;
-			
-			
-			
-		} catch (SQLException e) {
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	

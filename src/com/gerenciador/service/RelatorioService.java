@@ -21,9 +21,9 @@ public class RelatorioService implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
-	private static final String FOLDER_RELATORIOS = "/relatorios";
+	private static final String FOLDER_RELATORIOS = "/WEB-INF/classes/com/gerenciador/relatorios";
 	private static final String SUBREPORT_DIR = "SUBREPORT_DIR";
-	private String SERATOR = File.separator;  
+	private String SEPARATOR = File.separator;  
 	private String caminhoArquivoRelatorio = null;
 	private JRExporter exporter = null;
 	private String caminhoSubReport_Dir = "";
@@ -40,26 +40,26 @@ public class RelatorioService implements Serializable{
 		/*Fornece o caminho fisico até a pasta que contem os relatórios  .jasper*/
 		String caminhoRelatorio = servletContext.getRealPath(FOLDER_RELATORIOS);
 		
-		File file = new File(caminhoRelatorio + SERATOR + nomeRelatorioJasper + ".jasper");
+		File file = new File(caminhoRelatorio + SEPARATOR + nomeRelatorioJasper + ".jasper");
 		
 		if (caminhoRelatorio == null
 				|| (caminhoRelatorio != null && caminhoRelatorio.isEmpty())
 				|| !file.exists()){
 			caminhoRelatorio = this.getClass().getResource(FOLDER_RELATORIOS).getPath();
-			SERATOR = "";
+			SEPARATOR = "";
 		}
 		
 		/*caminho para imagens*/
 		parametrosRelatorio.put("REPORT_PARAMETERS_IMG", caminhoRelatorio);
 		
 		/*caminho completo até o relatório compilado indicado*/
-		String caminhoArquivosJasper = caminhoRelatorio + SERATOR + nomeRelatorioJasper + ".jasper";
+		String caminhoArquivosJasper = caminhoRelatorio + SEPARATOR + nomeRelatorioJasper + ".jasper";
 		
 		/*Faz  o carregamento do relatório*/
 		JasperReport relatorioJasper = (JasperReport) JRLoader.loadObjectFromFile(caminhoArquivosJasper);
 		
 		/*seta parametros  SUBREPORT_DIR com o caminho fisico para subreport*/
-		caminhoSubReport_Dir = caminhoRelatorio + SERATOR;
+		caminhoSubReport_Dir = caminhoRelatorio + SEPARATOR;
 		parametrosRelatorio.put(SUBREPORT_DIR,caminhoSubReport_Dir);
 		
 		/*Carrega o arquivo */
@@ -72,7 +72,7 @@ public class RelatorioService implements Serializable{
 		}	
 		
 		/*Caminho relatorio exportado*/
-		caminhoArquivoRelatorio = caminhoRelatorio + SERATOR + nomeRelatorioSaida + "." + tipoExportar;
+		caminhoArquivoRelatorio = caminhoRelatorio + SEPARATOR + nomeRelatorioSaida + "." + tipoExportar;
 		
 		/*Criar novo arquivos exportado*/
 		

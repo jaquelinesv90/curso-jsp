@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,14 +38,12 @@ public class DownloadFileServlet extends HttpServlet {
 			ServletContext context = request.getServletContext();
 			
 			List<Chamado> chamados = daoChamado.listarChamados();
-			List dados = new ArrayList<>();
-			dados.add(chamados);
 			
 			String tipoExportar = request.getParameter("tipoExportar");
 
 			
-			String fileUrl = relatorioService.gerarRelatorio(dados, new HashMap(), 
-					"rel_chamado", "rel_chamado", request.getServletContext(), null);
+			String fileUrl = relatorioService.gerarRelatorio(chamados, new HashMap(), 
+					"rel_chamado", "rel_chamado", context, tipoExportar);
 			
 			//caminho completo e absoluto do arquivo
 			File downloadFile = new File(fileUrl);
@@ -74,8 +71,15 @@ public class DownloadFileServlet extends HttpServlet {
 			OutputStream outputStream = response.getOutputStream();
 			
 			byte[] buffer = new byte[4096];
-			int bytesReader= -1;
-		
+			int bytesRead= -1;
+			
+			//escrever bytes lidos a partir do fluxo de entrada para o fouxo de saida
+			while((bytesRead = inputStream.read(buffer)) != -1){
+				outputStream.write(buffer,0,bytesRead);
+			}
+			inputStream.close();
+			outputStream.close();
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -71,7 +71,7 @@ a					{
 				<br>
 				
 				<a href="chamadoServlet?hiddenAcao=novo">Novo</a>
-				<a>Imprimir</a>
+				<a href="DownloadFileServlet?tipoExportar=PDF">Imprimir</a>
 			<!--				
 				<input type="button" onclick="exibeMsgExcluir()" value="Excluir">
 				
